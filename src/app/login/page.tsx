@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
@@ -9,6 +9,27 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export default function LoginPage() {
+  return (
+    <Suspense fallback={<LoginFallback />}>
+      <LoginForm />
+    </Suspense>
+  );
+}
+
+function LoginFallback() {
+  return (
+    <main className="min-h-screen flex items-center justify-center px-6">
+      <div className="w-full max-w-md">
+        <p className="font-display text-xl tracking-tightest mb-12">
+          BTO <span className="italic text-clay">Buddy</span>
+        </p>
+        <div className="h-12 w-32 bg-paper-dim animate-pulse rounded" />
+      </div>
+    </main>
+  );
+}
+
+function LoginForm() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
     "idle",
