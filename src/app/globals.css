@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --grain-opacity: 0.03;
+  }
+
+  html {
+    color-scheme: light;
+  }
+
+  body {
+    @apply bg-paper text-ink antialiased;
+    font-feature-settings: "ss01", "ss02", "cv11";
+    background-image:
+      /* paper grain */
+      radial-gradient(circle at 1px 1px, rgba(26, 24, 20, 0.04) 1px, transparent 0),
+      /* warm vignette */
+      radial-gradient(ellipse at top, rgba(245, 230, 224, 0.4), transparent 60%);
+    background-size: 4px 4px, 100% 100%;
+    background-attachment: fixed;
+  }
+
+  /* Editorial display headings */
+  h1, h2, h3 {
+    @apply font-display tracking-tightest;
+  }
+
+  /* Monospace data callouts */
+  .num {
+    @apply font-mono tabular-nums;
+  }
+
+  /* Subtle horizontal rule, editorial-style */
+  .rule {
+    @apply border-t border-ink/10;
+  }
+
+  /* Section labels — small caps tracking */
+  .eyebrow {
+    @apply text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-muted;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* The "stamp" look for classification badges */
+  .stamp {
+    @apply inline-flex items-center px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] border;
+  }
+}
